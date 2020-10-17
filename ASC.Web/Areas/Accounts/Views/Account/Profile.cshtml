@@ -1,0 +1,63 @@
+﻿@model ASC.Web.Areas.Accounts.Models.ProfileViewModel
+@{
+    Layout = "_SecureLayout";
+}
+
+<div class="row"></div>
+<div class="row padding-top-20px">
+    @{
+        var errors = ViewData.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
+    }
+    @if (errors.Count > 0)
+    {
+        <div class="card red darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Errors</span>
+                <p>
+                    @foreach(var error in errors)
+                    {
+                        @error
+                    }
+                </p>
+            </div>
+        </div>
+    }
+
+    @* Details Section *@
+    <div class="row z-depth-3">
+        <div class="col s12 padding-0px">
+            <div class="section white-text padding-left-10px blue-grey lighten-1">
+                <h5>Profile</h5>
+            </div>
+            <div class="divider"></div>
+            <form asp-controller="Account" asp-action="Profile" method="post" class="col s12" id="fromUser">
+                <div class="input-field col s4">
+                    <input asp-for="Username" class="validate" />
+                    <label asp-for="Username"></label>
+                </div>
+                <div class="input-field col s4">
+                    <input asp-for="Phone" class="validate" />
+                    <label asp-for="Phone"></label>
+                </div>
+                <div class="input-field col s4 right-align">
+                    <button class="btn waves-effect waves-light btnSubmit" type="submit" name="action">
+                        Save
+                        <i class="material-icons right">send</i>
+                    </button>
+                    <button class="btn waves-effect waves-light reset  red lighten-1" type="button" name="action">
+                        Reset
+                    </button>
+                </div>
+                <div class="row col s12 right-align" asp-validation-summary="All"></div>
+            </form>
+
+        </div>
+        <div class="row"></div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+}

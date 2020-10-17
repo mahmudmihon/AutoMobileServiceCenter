@@ -1,0 +1,116 @@
+﻿@using Microsoft.AspNetCore.Http
+@using ASC.Utilities
+@inject IHttpContextAccessor UserHttpContext
+@inject ASC.Web.Data.INavigationCacheOperations navigationCache
+
+@{
+    Layout = "_MasterLayout";
+    var currentUser = UserHttpContext.HttpContext.User.GetCurrentUserDetails();
+}
+
+<!-- Header -->
+<header class="secureLayout">
+    <nav class="top-nav blue-grey lighten-1">
+        <div class="nav-wrapper row valign-wrapper">
+            <div class="col s12 valign-wrapper">
+                <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only white-text"><i class="material-icons">menu</i></a>
+                <h5><a class="page-title">Automobile Service Center</a></h5>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Side NavBar -->
+    <ul id="nav-mobile" class="sidenav sidenav-fixed">
+        <li>
+            <div class="user-view">
+                <div class="background blue-grey lighten-1"></div>
+                <a href="#!user"><img class="circle" src="~/images/male.png"></a>
+                <a href="#!name"><span class="white-text name">@currentUser.Name</span></a>
+                <a href="#!email"><span class="white-text email">@currentUser.Email</span></a>
+            </div>
+        </li>
+        @await Component.InvokeAsync("ASC.Utilities.Navigation.LeftNavigation", await navigationCache.GetNavigationCacheAsync())
+    </ul>
+</header>
+
+<!-- Render Body -->
+<main class="secureLayout">
+    <div class="row margin-bottom-0px">
+        <div class="col s12">
+            @RenderBody()
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="page-footer blue-grey lighten-1 secureLayout">
+    <div class="row">
+        <div class="col l6 s12">
+            <h5 class="white-text">About Us</h5>
+            <p class="grey-text text-lighten-4">
+                Automobile Service Center is certified Company to perform car services. Our Workshop operations started in the month of October, 2010.
+                We primarily focus on providing better services to our customers, and as a result of the hard work we were awarded as the "Best Service" for the year 2008 and that too within a short period of time.
+            </p>
+
+        </div>
+        <div class="col l3 s12">
+            <h5 class="white-text">Additional Services</h5>
+            <ul>
+                <li><a class="white-text" href="#!">Services</a></li>
+                <li><a class="white-text" href="#!">Finance</a></li>
+                <li><a class="white-text" href="#!">Used Cars</a></li>
+                <li><a class="white-text" href="#!">Insurance</a></li>
+                <li><a class="white-text" href="#!">Driving School</a></li>
+            </ul>
+        </div>
+        <div class="col l3 s12">
+            <h5 class="white-text">Connect</h5>
+            <ul>
+                <li><a class="white-text" href="#!">Facebook</a></li>
+                <li><a class="white-text" href="#!">LinkedIn</a></li>
+                <li><a class="white-text" href="#!">Twitter</a></li>
+                <li><a class="white-text" href="#!">Youtube</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-copyright row margin-bottom-0px">
+        <div class="col s12">
+            <div class="col s8">
+                Powered by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+            <div class="col s4">
+                @await Html.PartialAsync("_SelectCulture")
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright row margin-bottom-0px"></div>
+</footer>
+
+<form class="hide" method="post" id="logout_form" asp-controller="Account" asp-action="Logout">
+    <input type="submit" value="Logout" />
+</form>
+
+<form class="hide" method="post" id="resetPassword_form" asp-controller="Account" asp-action="InitiateResetPassword">
+</form>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#ancrLogout').click(function () {
+                $('#logout_form').submit();
+            });
+
+            $('#ancrResetPassword').click(function () {
+                $('#resetPassword_form').submit();
+            });
+
+        });
+
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+    </script>
+}

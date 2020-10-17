@@ -1,0 +1,64 @@
+﻿@model ASC.Web.Areas.ServiceRequests.Models.DashboardViewModel
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor UserHttpContext
+@using ASC.Models.BaseTypes
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
+@{
+    Layout = "_SecureLayout";
+}
+<div class="row"></div>
+@await Html.PartialAsync("_ServiceRequestGrid", Model.ServiceRequests, new ViewDataDictionary(ViewData) {
+    { "SectionName", SharedLocalizer["SectionHeader_ServiceRequests_Text"] },
+    { "Id", "tblServiceRequests" },
+    { "IsAudit", true }
+})
+
+@if (UserHttpContext.HttpContext.User.IsInRole(Roles.Admin.ToString()))
+{
+    <div class="row">
+        <div class="col s6">
+            <ul class="collection with-header height-300px overflow-y">
+                <li class="collection-header"><h5>Active Service Engineers</h5></li>
+                @if (Model.ActiveServiceRequests.Any())
+                {
+                    @foreach (var activeServiceRequest in Model.ActiveServiceRequests)
+                    {
+                        <li class="collection-item">
+                            <div>
+                                <span class="new badge" data-badge-caption="">@activeServiceRequest.Value</span>@activeServiceRequest.Key
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="collection-item">
+                        <div class="card-panel teal lighten-2 white-text">No Active Service Requests.</div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.tblServiceRequests').DataTable();
+            $('.tblServiceRequests').css("width", "100%");
+
+            $(document).on('click', '.view', function () {
+                var tableId = '#' + $(this).parents('table').attr('id');
+                var serviceRequest = $(tableId).DataTable().row($(this).parents('tr')).data();
+
+                // For Service Request Table, populate id with RowKey
+                var id = serviceRequest[0];
+
+                window.location.href = '@Url.Action("ServiceRequestDetails", "ServiceRequest", new { Area = "ServiceRequests" })?Id=' + id;
+            });
+        });
+    </script>
+}

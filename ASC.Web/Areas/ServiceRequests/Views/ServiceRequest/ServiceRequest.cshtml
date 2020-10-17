@@ -1,0 +1,74 @@
+﻿@model ASC.Web.Areas.ServiceRequests.Models.ServiceRequestViewModel
+@using System.Globalization
+@{
+    Layout = "~/Views/Shared/_SecureLayout.cshtml";
+}
+
+<div class="row"></div>
+<div class="row padding-top-20px">
+
+    @* Details Section *@
+    <div class="row z-depth-3">
+        <div class="col s12 padding-0px">
+            <div class="section white-text padding-left-10px blue-grey lighten-1">
+                <h5>New Service Request</h5>
+            </div>
+            <div class="divider"></div>
+            <form asp-controller="ServiceRequest" asp-action="ServiceRequest" method="post" class="col s12">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select asp-for="VehicleName" class="" required="required">
+                            <option value="" disabled selected>Please select one</option>
+                            <option value="Honda">Honda</option>
+                            <option value="General Motors">General Motors</option>
+                            <option value="Ford">Ford</option>
+                        </select>
+                        <label asp-for="VehicleName"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select asp-for="VehicleType" class="validate" required="required">
+                            <option value="" disabled selected>Please select one</option>
+                            <option value="Car">Car</option>
+                            <option value="Truck">Truck</option>
+                            <option value="Camper">Camper</option>
+                        </select>
+                        <label asp-for="VehicleType"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input asp-for="RequestedDate" type="text" class="datepicker" data-value="@(Model.RequestedDate.HasValue ?
+        Model.RequestedDate.Value.ToString("dd MMMM, yyyy", CultureInfo.InvariantCulture) : string.Empty)" />
+                        <label asp-for="RequestedDate"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <textarea asp-for="RequestedServices" class="materialize-textarea validate"></textarea>
+                        <label asp-for="RequestedServices"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 right-align">
+                        <button class="btn waves-effect waves-light btnSubmit" type="submit" name="action">
+                            Create
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="row col s12 right-align" asp-validation-summary="All"></div>
+                </div>
+            </form>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+            $("select[required]").css({ display: "block", position: 'absolute', visibility: 'hidden' })
+
+            $('.datepicker').datepicker();           
+        });
+    </script>
+}
+

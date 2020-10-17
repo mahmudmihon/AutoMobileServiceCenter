@@ -1,0 +1,171 @@
+﻿@model ASC.Web.Areas.Accounts.Models.ServiceEngineerViewModel
+@{ 
+    Layout = "_SecureLayout";
+}
+
+<div class="row"></div>
+<div class="row padding-top-20px">
+
+    <div class="row z-depth-3">
+        <div class="section white-text padding-left-10px blue-grey lighten-1">
+            <h5>Users</h5>
+        </div>
+        <div class="divider"></div>
+        <div class="col s12 padding-bottom-15px">
+            @if (Model.ServiceEngineers != null)
+            {
+                @* Display List of Service Engineers *@
+                <table class="highlight centered" id="tblServiceEngineers">
+                    <thead>
+                        <tr>
+                            <th data-field="Email">Email</th>
+                            <th data-field="UserName">Name</th>
+                            <th data-field="IsActive">Is Active</th>
+                            <th data-field="IsActiveImg">Is Active</th>
+                            <th data-field="Actions">Edit User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.ServiceEngineers)
+                        {
+                            <tr>
+                                <td>@user.Email</td>
+                                <td>@user.UserName</td>
+                                <td>@(Boolean.Parse(user.IsActive))</td>
+                                <td><img src="@(Boolean.Parse(user.IsActive) ? "/images/green_tick.png" : "/images/red_cross.png")" /></td>
+                                <td><i class="small material-icons edit cursor-hand">mode_edit</i></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                @* In case of No records, display no records message *@
+                <div class="card blue-grey lighten-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">No Service Engineers!!!</span>
+                        <p>
+                            No Service Engineers found, please add a Service Engineer to system.
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row"></div>
+
+    @* Details Section *@
+    <div class="row z-depth-3">
+        <div class="col s12 padding-0px">
+            <div class="section white-text padding-left-10px blue-grey lighten-1">
+                <h5>Service Engineer Details</h5>
+            </div>
+            <div class="divider"></div>
+            <form asp-controller="Account" asp-action="ServiceEngineers" method="post" class="col s12" id="fromUser">
+                <input type="hidden" asp-for="Registration.IsEdit" />
+                <input type="hidden" asp-for="Registration.Email"/>
+                <div class="input-field col s4">
+                    <input asp-for="Registration.Email" id="Input_Registration_Email" />
+                    <label asp-for="Registration.Email"></label>
+                </div>
+                <div class="input-field col s4">
+                    <input asp-for="Registration.UserName" class="validate" />
+                    <label asp-for="Registration.UserName"></label>
+                </div>
+                <div class="input-field col s4">
+                    <input asp-for="Registration.Password" class="validate" />
+                    <label asp-for="Registration.Password"></label>
+                </div>
+                <div class="input-field col s4">
+                    <input asp-for="Registration.ConfirmPassword" class="validate" />
+                    <label asp-for="Registration.ConfirmPassword"></label>
+                </div>
+                <div class="input-field col s4">
+                    <div class="switch">
+                        <label>
+                            Is Active
+                            <input asp-for="Registration.IsActive" class="validate" />
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="input-field col s4 right-align">
+                    <button class="btn waves-effect waves-light btnSubmit" type="submit" name="action">
+                        Create
+                        <i class="material-icons right">send</i>
+                    </button>
+                    <button class="btn waves-effect waves-light reset  red lighten-1" type="button" name="action">
+                        Reset
+                    </button>
+                </div>
+                <div class="row col s12 right-align" asp-validation-summary="All"></div>
+            </form>
+
+        </div>
+        <div class="row"></div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable to show list of Engineers
+            var table = $('#tblServiceEngineers').DataTable({
+                'pageLength': 3,
+                // Number of records to be displayed per page
+                'lengthMenu': [[3, 5, 10, -1], [3, 5, 10, 'All']]
+            });
+
+            // Set Styles for DataTable and Number of Records to be displayed dropdown
+            $('#tblServiceEngineers').css("width", "100%");
+            $('select[name="tblServiceEngineers_length"]').material_select();
+
+            // Get the column API object
+            var isActiveColumn = table.column(2);
+            isActiveColumn.visible(false);
+
+            // Handle Reset fucntionality
+            $(document).on("click", ".reset", function () {
+                $('#fromUser')[0].reset();
+                $('#Input_Registration_Email').removeAttr('disabled');
+                $('.btnSubmit').text('Create');
+                $('#Registration_IsEdit').val('False');
+            });
+
+            // This is required to disable Email filed on Server side model validation failure.
+            if ($('#Registration_IsEdit').val() === 'True') {
+                $('#Input_Registration_Email').attr('disabled', 'disabled');
+            }
+
+            // On click of Edit icon, populate the details section with details of service engineer
+            $(document).on('click', '.edit', function () {
+                var user = $('#tblServiceEngineers').DataTable().row($(this).parents('tr')).data();
+
+                $('#Registration_IsEdit').val('True');
+              
+                $('#Input_Registration_Email').val(user[0]);
+                $('#Input_Registration_Email').attr('disabled', 'disabled');
+
+                $('#Registration_UserName').val(user[1]);
+                $('#Registration_UserName').addClass('valid');
+
+                $('#Registration_IsActive').prop('checked', user[2] === 'True' ? true : false);
+
+                $('.btnSubmit').text('Save');
+                Materialize.updateTextFields();
+            });
+
+            // Set hidden Email field to correct value from UI field
+            // This is required for 
+            $(document).on('click', '.btnSubmit', function () {
+                $('#Registration_Email').val($('#Input_Registration_Email').val());
+                Materialize.updateTextFields();
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,162 @@
+{
+  "MenuItems": [
+    {
+      "DisplayName": "Dashboard",
+      "MaterialIcon": "dashboard",
+      "Link": "/ServiceRequests/Dashboard/Dashboard",
+      "IsNested": false,
+      "Sequence": 1,
+      "UserRoles": [ "User", "Engineer", "Admin" ],
+      "NestedItems": []
+    },
+    {
+      "DisplayName": "User Administration",
+      "MaterialIcon": "supervisor_account",
+      "Link": "",
+      "IsNested": true,
+      "Sequence": 2,
+      "UserRoles": [ "Admin" ],
+      "NestedItems": [
+        {
+          "DisplayName": "Customers",
+          "MaterialIcon": "account_box",
+          "Link": "/Accounts/Account/Customers",
+          "IsNested": false,
+          "Sequence": 1,
+          "UserRoles": [ "Admin" ],
+          "NestedItems": []
+        },
+        {
+          "DisplayName": "Service Engineers",
+          "MaterialIcon": "person_add",
+          "Link": "/Accounts/Account/ServiceEngineers",
+          "IsNested": false,
+          "Sequence": 2,
+          "UserRoles": [ "Admin" ],
+          "NestedItems": []
+        }
+      ]
+    },
+    {
+      "DisplayName": "Service Requests",
+      "MaterialIcon": "local_laundry_service",
+      "Link": "",
+      "IsNested": true,
+      "Sequence": 3,
+      "UserRoles": [ "User", "Engineer", "Admin" ],
+      "NestedItems": [
+        {
+          "DisplayName": "New Service Request",
+          "MaterialIcon": "insert_invitation",
+          "Link": "/ServiceRequests/ServiceRequest/ServiceRequest",
+          "IsNested": false,
+          "Sequence": 1,
+          "UserRoles": [ "User", "Engineer", "Admin" ],
+          "NestedItems": []
+        },
+        {
+          "DisplayName": "Search Service Requests",
+          "MaterialIcon": "search",
+          "Link": "/ServiceRequests/ServiceRequest/SearchServiceRequests",
+          "IsNested": false,
+          "Sequence": 2,
+          "UserRoles": [ "Engineer", "Admin" ],
+          "NestedItems": []
+        }
+      ]
+    },
+    {
+      "DisplayName": "Promotions",
+      "MaterialIcon": "inbox",
+      "Link": "",
+      "IsNested": true,
+      "Sequence": 4,
+      "UserRoles": [ "User", "Engineer", "Admin" ],
+      "NestedItems": [
+        {
+          "DisplayName": "New Promotion",
+          "MaterialIcon": "insert_invitation",
+          "Link": "/Promotions/Promotions/Promotion",
+          "IsNested": false,
+          "Sequence": 1,
+          "UserRoles": [ "Admin" ],
+          "NestedItems": []
+        },
+        {
+          "DisplayName": "All Promotions",
+          "MaterialIcon": "search",
+          "Link": "/Promotions/Promotions/Promotions",
+          "IsNested": false,
+          "Sequence": 2,
+          "UserRoles": [ "User", "Engineer", "Admin" ],
+          "NestedItems": []
+        }
+      ]
+    },
+    {
+      "DisplayName": "Master Data",
+      "MaterialIcon": "perm_data_setting",
+      "Link": "",
+      "IsNested": true,
+      "Sequence": 6,
+      "UserRoles": [ "Admin" ],
+      "NestedItems": [
+        {
+          "DisplayName": "Master Keys",
+          "MaterialIcon": "data_usage",
+          "Link": "/Configuration/MasterData/MasterKeys",
+          "IsNested": false,
+          "Sequence": 1,
+          "UserRoles": [ "Admin" ],
+          "NestedItems": []
+        },
+        {
+          "DisplayName": "Master Values",
+          "MaterialIcon": "settings_system_daydream",
+          "Link": "/Configuration/MasterData/MasterValues",
+          "IsNested": false,
+          "Sequence": 2,
+          "UserRoles": [ "Admin" ],
+          "NestedItems": []
+        }
+      ]
+    },
+    {
+      "DisplayName": "Settings",
+      "MaterialIcon": "settings",
+      "Link": "",
+      "IsNested": true,
+      "Sequence": 7,
+      "UserRoles": [ "User", "Engineer", "Admin" ],
+      "NestedItems": [
+        {
+          "DisplayName": "Profile",
+          "MaterialIcon": "system_update_alt",
+          "Link": "/Accounts/Account/Profile",
+          "IsNested": false,
+          "Sequence": 1,
+          "UserRoles": [ "User", "Engineer", "Admin" ],
+          "NestedItems": []
+        },
+        {
+          "DisplayName": "Reset Password",
+          "MaterialIcon": "lock_outline",
+          "Link": "#!",
+          "IsNested": false,
+          "Sequence": 2,
+          "UserRoles": [ "User", "Engineer", "Admin" ],
+          "NestedItems": []
+        }
+      ]
+    },
+    {
+      "DisplayName": "Logout",
+      "MaterialIcon": "exit_to_app",
+      "Link": "#!",
+      "IsNested": false,
+      "Sequence": 8,
+      "UserRoles": [ "User", "Engineer", "Admin" ],
+      "NestedItems": []
+    }
+  ]
+}

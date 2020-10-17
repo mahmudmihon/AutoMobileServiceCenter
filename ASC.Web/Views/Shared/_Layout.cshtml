@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "_MasterLayout";
+}
+<header>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="/" class="brand-logo">
+                <img class="responsive-img" src="~/images/logo.jpg" alt="Logo" />
+            </a>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/Account/Login">Login</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <!--
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            -->
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <br><br>
+                <h1 class="header center teal-text text-lighten-2">Automobile Service Center</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light ">Where Quality meets Safety</h5>
+                </div>
+                <div class="row center">
+                    <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="parallax"><img src="~/images/background1.jpg" alt="Unsplashed background img 1"></div>
+    </div>
+</header>
+
+<!-- Render Body -->
+<main>
+    <div class="row margin-bottom-0px">
+        <div class="col s12 padding-0px">
+            @RenderBody()
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="page-footer teal">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">About Us</h5>
+                <p class="grey-text text-lighten-4">
+                    Automobile Service Center is certified Company to perform car services. Our Workshop operations started in the month of October, 2010.
+                    We primarily focus on providing better services to our customers, and as a result of the hard work we were awarded as the "Best Service" for the year 2008 and that too within a short period of time.
+                </p>
+
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Additional Services</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Services</a></li>
+                    <li><a class="white-text" href="#!">Finance</a></li>
+                    <li><a class="white-text" href="#!">Used Cars</a></li>
+                    <li><a class="white-text" href="#!">Insurance</a></li>
+                    <li><a class="white-text" href="#!">Driving School</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Facebook</a></li>
+                    <li><a class="white-text" href="#!">LinkedIn</a></li>
+                    <li><a class="white-text" href="#!">Twitter</a></li>
+                    <li><a class="white-text" href="#!">Youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container row">
+            <div class="col s8">
+                Powered by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+            <div class="col s4">
+                @await Html.PartialAsync("_SelectCulture")
+            </div>
+        </div>
+    </div>
+</footer>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
+

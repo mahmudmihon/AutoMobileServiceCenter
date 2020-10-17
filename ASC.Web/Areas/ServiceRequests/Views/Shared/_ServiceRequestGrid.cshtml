@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ASC.Models.Models.ServiceRequest>
+@using ASC.Models.BaseTypes
+@{
+    var isAudit = ViewBag.IsAudit;
+}
+<div class="row"></div>
+<div class="row padding-top-20px">
+
+    <div class="row z-depth-3">
+        <div class="section white-text padding-left-10px blue-grey lighten-1">
+            <h5>@ViewBag.SectionName</h5>
+        </div>
+        <div class="divider"></div>
+        <div class="col s12 padding-bottom-15px">
+            @* Display List of Service Requests *@
+            <table class="highlight centered tblServiceRequests display" id="@ViewBag.Id">
+                <thead>
+                    <tr>
+                        <th data-field="Id"></th>
+                        <th data-field="Email">User</th>
+                        <th data-field="Status">Status</th>
+                        <th data-field="RequestedDate">Requested Date</th>
+                        <th data-field="ServiceEngineer">Service Engineer</th>
+                        @if (isAudit)
+                        {
+                            <th data-field="RequestedServices">Requested Services</th>
+                        }
+                        <th data-field="Actions">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var serviceRequest in Model)
+                    {
+                        <tr>
+                            <td>@serviceRequest.Id</td>
+                            <td>@serviceRequest.Email</td>
+                            <td>
+                                @switch ((Status)Enum.Parse(typeof(Status), serviceRequest.Status))
+                                {
+                                    case Status.New:
+                                    case Status.Initiated:
+                                    case Status.InProgress:
+                                    case Status.Completed:
+                                        <div class="white-text teal lighten-1 center-align">
+                                            <span>@serviceRequest.Status</span>
+                                        </div>
+                                        break;
+                                    case Status.RequestForInformation:
+                                    case Status.Pending:
+                                    case Status.Denied:
+                                        <div class="white-text red lighten-1 center-align">
+                                            <span>@serviceRequest.Status</span>
+                                        </div>
+                                        break;
+                                    case Status.PendingCustomerApproval:
+                                        <div class="white-text orange lighten-1 center-align">
+                                            <span>@serviceRequest.Status</span>
+                                        </div>
+                                        break;
+                                    default:
+                                        break;
+
+                                }
+                            </td>
+                            <td>@(serviceRequest.RequestedDate == null ? "" : serviceRequest.RequestedDate.Value.ToString("dd/MM/yyyy") )</td>
+                            <td>@serviceRequest.ServiceEngineer</td>
+                            @if (isAudit)
+                            {
+                                var trimText = String.IsNullOrWhiteSpace(serviceRequest.RequestedServices) ?
+                                    string.Empty :
+                                    serviceRequest.RequestedServices.Length > 50 ?
+                                        string.Format("{0}...", serviceRequest.RequestedServices.Substring(0, 50)) :
+                                        serviceRequest.RequestedServices;
+                                <td title="@serviceRequest.RequestedServices">@trimText</td>
+                            }
+                            <td><i class="small material-icons view cursor-hand">pageview</i></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
