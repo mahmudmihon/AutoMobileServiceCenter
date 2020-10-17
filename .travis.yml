@@ -1,5 +1,6 @@
 language: csharp
-dist: trusty
+solution: ASC.sln
+dist: focal
 mono: none
 dotnet: 3.1
 script:
