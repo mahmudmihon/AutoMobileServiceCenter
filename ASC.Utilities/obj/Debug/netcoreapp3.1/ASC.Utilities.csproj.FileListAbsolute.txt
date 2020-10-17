@@ -1,9 +1,0 @@
-D:\ASC\ASC.Utilities\bin\Debug\netcoreapp3.1\ASC.Utilities.deps.json
-D:\ASC\ASC.Utilities\bin\Debug\netcoreapp3.1\ASC.Utilities.dll
-D:\ASC\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.AssemblyInfoInputs.cache
-D:\ASC\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.AssemblyInfo.cs
-D:\ASC\ASC.Utilities\bin\Debug\netcoreapp3.1\ASC.Utilities.pdb
-D:\ASC\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.dll
-D:\ASC\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.pdb
-D:\ASC\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.csproj.CoreCompileInputs.cache
-D:\ASC\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.csprojAssemblyReference.cache
