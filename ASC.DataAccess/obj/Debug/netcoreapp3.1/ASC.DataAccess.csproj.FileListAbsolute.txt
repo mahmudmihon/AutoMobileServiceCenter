@@ -1,0 +1,14 @@
+D:\ASC\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.DataAccess.deps.json
+D:\ASC\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.DataAccess.dll
+D:\ASC\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.csprojAssemblyReference.cache
+D:\ASC\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.AssemblyInfoInputs.cache
+D:\ASC\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.AssemblyInfo.cs
+D:\ASC\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.DataAccess.pdb
+D:\ASC\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.Models.dll
+D:\ASC\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.Utilities.dll
+D:\ASC\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.Models.pdb
+D:\ASC\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.Utilities.pdb
+D:\ASC\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.csproj.CoreCompileInputs.cache
+D:\ASC\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.csproj.CopyComplete
+D:\ASC\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.dll
+D:\ASC\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.pdb

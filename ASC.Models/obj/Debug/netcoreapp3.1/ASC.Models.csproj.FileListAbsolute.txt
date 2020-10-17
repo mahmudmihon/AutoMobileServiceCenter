@@ -1,0 +1,8 @@
+D:\ASC\ASC.Models\bin\Debug\netcoreapp3.1\ASC.Models.deps.json
+D:\ASC\ASC.Models\bin\Debug\netcoreapp3.1\ASC.Models.dll
+D:\ASC\ASC.Models\obj\Debug\netcoreapp3.1\ASC.Models.AssemblyInfoInputs.cache
+D:\ASC\ASC.Models\obj\Debug\netcoreapp3.1\ASC.Models.AssemblyInfo.cs
+D:\ASC\ASC.Models\bin\Debug\netcoreapp3.1\ASC.Models.pdb
+D:\ASC\ASC.Models\obj\Debug\netcoreapp3.1\ASC.Models.csproj.CoreCompileInputs.cache
+D:\ASC\ASC.Models\obj\Debug\netcoreapp3.1\ASC.Models.dll
+D:\ASC\ASC.Models\obj\Debug\netcoreapp3.1\ASC.Models.pdb
