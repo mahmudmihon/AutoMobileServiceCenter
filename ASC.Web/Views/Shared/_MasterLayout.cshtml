@@ -1,0 +1,32 @@
+﻿@using Microsoft.Extensions.Options;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>Automobile Service Center Application</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="~/css/datatables.min.css"> -->
+    <link href="~/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+
+</head>
+<body>
+    <!-- Render Body -->
+    @RenderBody()
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/materialize.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <!--<script type="text/javascript" charset="utf8" src="~/js/datatables.min.js"></script> -->
+    <script src="~/js/init.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

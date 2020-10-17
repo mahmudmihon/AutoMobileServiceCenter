@@ -1,0 +1,152 @@
+﻿@model ASC.Web.Areas.ServiceRequests.Models.UpdateServiceRequestViewModel
+@using Microsoft.AspNetCore.Http
+@using ASC.Models.BaseTypes
+@inject IHttpContextAccessor UserHttpContext
+@{
+    Layout = "_SecureLayout";
+}
+
+@{
+    // Compute Service Engineer and Status Disable logic
+    string serviceEngineerDisabled = null;
+    if (!UserHttpContext.HttpContext.User.IsInRole(Roles.Admin.ToString()))
+    {
+        serviceEngineerDisabled = "disabled";
+    }
+
+    string statusDisabled = null;
+    if (!UserHttpContext.HttpContext.User.IsInRole(Roles.Admin.ToString()) &&
+        !UserHttpContext.HttpContext.User.IsInRole(Roles.Engineer.ToString()))
+    {
+        statusDisabled = "disabled";
+    }
+
+    // Customer can update the status only if the original status is Customer pending approval.
+    if (UserHttpContext.HttpContext.User.IsInRole(Roles.User.ToString()) &&
+    Model.Status == Status.PendingCustomerApproval.ToString())
+    {
+        statusDisabled = null;
+        ViewBag.Status = new List<string> { "Completed", "RequestForInformation" };
+    }
+}
+
+<div class="row"></div>
+<div class="row padding-top-20px">
+
+    @* Details Section *@
+    <div class="row z-depth-3">
+        <div class="col s12 padding-0px">
+            <div class="section white-text padding-left-10px blue-grey lighten-1">
+                <h5>Service Request Details</h5>
+            </div>
+            <div class="divider"></div>
+            <form asp-controller="ServiceRequest" asp-action="UpdateServiceRequestDetails" method="post" class="col s12">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="RequestedDate" />
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select asp-for="VehicleName" class="" required="required" disabled>
+                            <option value="">Please select one</option>
+                            <option value="Honda">Honda</option>
+                            <option value="General Motors">General Motors</option>
+                            <option value="Ford">Ford</option>
+                        </select>
+                        <label asp-for="VehicleName"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select asp-for="VehicleType" class="validate" required="required" disabled>
+                            <option value="">Please select one</option>
+                            <option value="Car">Car</option>
+                            <option value="Truck">Truck</option>
+                            <option value="Camper">Camper</option>
+                        </select>
+                        <label asp-for="VehicleType"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input asp-for="RequestedDate" type="text" disabled="disabled" class="datepicker" />
+                        <label asp-for="RequestedDate"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <textarea asp-for="RequestedServices" class="materialize-textarea validate"></textarea>
+                        <label asp-for="RequestedServices"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select asp-for="ServiceEngineer"
+                                asp-items="@(new SelectList(ViewBag.ServiceEngineers, "Email", "Email"))"
+                                class="" required="required" disabled=@serviceEngineerDisabled>
+                            <option value="">Please select one</option>
+                        </select>
+                        <label asp-for="ServiceEngineer"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select asp-for="Status"
+                                asp-items="@(new SelectList(ViewBag.Status))"
+                                class="validate" required="required" disabled=@statusDisabled>
+                            <option value="">Please select one</option>
+                        </select>
+                        <label asp-for="Status"></label>
+                    </div>
+                    <div class="input-field col s12 right-align">
+                        <button class="btn waves-effect waves-light btnSubmit" type="submit" name="action">
+                            Update
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="row col s12 right-align" asp-validation-summary="All"></div>
+                </div>
+            </form>
+
+        </div>
+        <div class="row"></div>
+    </div>
+
+    @* Messages Section *@
+    <input type="hidden" id="hdnCustomerEmail" value="@Model.Email" />
+    <div class="row">
+        <div class="col s8">
+            <ul class="collection with-header">
+                <li class="row collection-header">
+                    <div class="col s6"><h5>Service Request Messages</h5></div>
+                    <div class="col s6 padding-top-10px right">
+                        <div class="col chip right">
+                            User
+                            <img src="/images/red_dot.png" data-id="isCu">
+                        </div>
+                        <div class="col chip right">
+                            Admin
+                            <img src="/images/red_dot.png" data-id="isAd">
+                        </div>
+                        <div class="col chip right">
+                            Engineer
+                            <img src="/images/red_dot.png" data-id="isSe">
+                        </div>
+                    </div>
+                </li>
+                <li class="collection-item height-300px overflow-y messages">
+                    <ul id="messagesList"></ul>
+                    <div class="card-panel teal lighten-2 white-text noMessages hide">No Messages.</div>
+                </li>
+            </ul>
+            <div class="input-field col s12">
+                <input type="text" id="txtMessage" />
+                <label for="txtMessage">Type message here and press enter.</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+            $("select[required]").css({ display: "block", position: 'absolute', visibility: 'hidden' })
+
+            $('.datepicker').datepicker();
+        });
+    </script>
+}
