@@ -1,8 +1,9 @@
 language: csharp
 solution: ASC.sln
-dist: focal
 mono: none
+dist: xenial
 dotnet: 3.1
+install:
+  - dotnet restore
 script:
-  -dotnet restore -s https://api.nuget.org/v3/index.json
-  -dotnet build
+  - dotnet build
